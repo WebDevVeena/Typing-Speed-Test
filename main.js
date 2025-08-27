@@ -41,7 +41,10 @@ getData().then(passage=>{
     content_box.addEventListener('keydown',(event)=>{
         if(!isActive) return; // disable textarea
         if (!startTime) return;
-        // if (written_content.length == content.length)
+        if (written_content.length == content.length) {
+            isActive = false;
+            return;
+        }
         console.log(event.key);
         if(event.key == "Alt" || event.key == "Shift" || event.ctrlKey || event.key == "CapsLock") return;
 
@@ -95,7 +98,7 @@ start.addEventListener('click',()=>{
 
     let counter = setInterval(()=>{
         timer.innerText = --count;
-        if(count<=0) {
+        if(count<=0 || !isActive) {
             clearInterval(counter);
             isActive = false;
             calculateResult();
