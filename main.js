@@ -40,7 +40,8 @@ getData().then(passage=>{
     typing_level.innerText = level;
     content_box.addEventListener('keydown',(event)=>{
         if(!isActive) return; // disable textarea
-
+        if (!startTime) return;
+        // if (written_content.length == content.length)
         console.log(event.key);
         if(event.key == "Alt" || event.key == "Shift" || event.ctrlKey || event.key == "CapsLock") return;
 
@@ -60,6 +61,10 @@ getData().then(passage=>{
             check();
         }
 
+        if(event.key ===' ') {
+            event.preventDefault()
+        }
+
         // console.log(written_contenxt);
 
         
@@ -77,7 +82,7 @@ function check() {
          span.className+= " "+"text-red-500";
          msitake_count++;
     }
-        span.textContent = content[i] == " " ? '\u00A0': content[i];
+        span.textContent = content[i];
         overlay.appendChild(span);
 }
 
